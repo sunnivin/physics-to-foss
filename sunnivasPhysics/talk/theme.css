@@ -1,0 +1,357 @@
+/* @theme theme */
+/* sunnivasPhysics theme - My path to NGI */
+
+@import 'default';
+
+:root {
+  --primary: #B22222;
+  --darkgray: #323232;
+  --lightgray: gray;
+  --white-back: #F5F5F5;
+}
+
+section {
+  background-color: var(--white-back);
+  color: black;
+  font-family: 'Times New Roman', serif;
+  padding: 40px;
+}
+
+h1 {
+  color: var(--primary);
+  font-size: 2.2em;
+  margin-bottom: 0.3em;
+}
+
+h2 {
+  color: var(--lightgray);
+  font-size: 1.6em;
+  font-weight: normal;
+}
+
+h3 {
+  color: var(--lightgray);
+  font-size: 1.3em;
+  font-weight: normal;
+}
+
+/* Title slide styling */
+section.title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+section.title h1 {
+  font-size: 3em;
+  color: var(--primary);
+  margin-bottom: 0.2em;
+}
+
+section.title h2 {
+  font-size: 2em;
+  color: var(--lightgray);
+  margin-top: 0;
+}
+
+section.title h3 {
+  font-size: 1.2em;
+  color: var(--darkgray);
+  margin-top: 2em;
+}
+
+/* Journey path styling */
+.journey-path {
+  font-size: 1.1em;
+  margin: 1em 0;
+  text-align: center;
+}
+
+.journey-path .current {
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.journey-path .past {
+  color: var(--lightgray);
+}
+
+/* Section header slides */
+section.section-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #eee;
+}
+
+section.section-header h1 {
+  color: var(--primary);
+  font-size: 3em;
+}
+
+section.section-header h2 {
+  color: var(--lightgray);
+  font-size: 1.8em;
+  font-weight: normal;
+  margin-top: 0.5em;
+}
+
+/* Two column layout */
+section.two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2em;
+  align-items: start;
+}
+
+/* Image grid for interests */
+.interests-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1em;
+  text-align: center;
+}
+
+.interests-grid figure {
+  margin: 0;
+  padding: 0.5em;
+}
+
+.interests-grid figcaption {
+  font-size: 0.8em;
+  color: var(--darkgray);
+  margin-top: 0.5em;
+}
+
+/* Logo styling */
+.logo {
+  height: 60px;
+  margin-right: 1em;
+  vertical-align: middle;
+}
+
+.logo-large {
+  height: 80px;
+}
+
+/* Highlight box */
+.highlight-box {
+  border: 2px solid var(--primary);
+  border-radius: 8px;
+  padding: 1em;
+  background: rgba(178, 34, 34, 0.05);
+  margin: 1em 0;
+}
+
+/* Pagination */
+section::after {
+  content: attr(data-marpit-pagination) ' / ' attr(data-marpit-pagination-total);
+  position: absolute;
+  right: 40px;
+  bottom: 30px;
+  font-size: 0.8em;
+  color: var(--lightgray);
+}
+
+/* Footer styling */
+footer {
+  position: absolute;
+  bottom: 10px;
+  left: 40px;
+  font-size: 0.7em;
+  color: var(--lightgray);
+}
+
+/* Code blocks */
+code {
+  background-color: #f0f0f0;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-family: 'Monaco', 'Consolas', monospace;
+}
+
+/* Lists */
+ul, ol {
+  margin-left: 1.5em;
+}
+
+li {
+  margin: 0.5em 0;
+}
+
+/* Blockquotes */
+blockquote {
+  border-left: 4px solid var(--primary);
+  padding-left: 1em;
+  margin-left: 0;
+  font-style: italic;
+  color: var(--darkgray);
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 0.5em 1em;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: var(--nightblue);
+  color: white;
+}
+
+/* Image captions */
+figcaption {
+  font-size: 0.7em;
+  color: var(--lightgray);
+  text-align: center;
+  font-style: italic;
+}
+
+/* Timeline styling */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+  margin-top: 1em;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  padding: 0.5em 1em;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.timeline-item.active {
+  background: linear-gradient(90deg, rgba(178, 34, 34, 0.15) 0%, rgba(178, 34, 34, 0) 100%);
+  border-left: 4px solid var(--primary);
+}
+
+.timeline-item.past {
+  opacity: 0.5;
+}
+
+.timeline-year {
+  font-weight: bold;
+  color: var(--primary);
+  min-width: 50px;
+}
+
+.timeline-content {
+  flex: 1;
+}
+
+.timeline-role {
+  font-weight: bold;
+  color: var(--darkgray);
+}
+
+.timeline-place {
+  font-size: 0.85em;
+  color: var(--lightgray);
+}
+
+/* Journey timeline styling */
+.jobs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15em;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+.job {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 1.5em;
+  padding: 0.1em 1em;
+  border-radius: 4px;
+}
+
+.job.highlight {
+  background: rgba(178, 34, 34, 0.1);
+  border-left: 3px solid var(--primary);
+  padding-right: 3em;
+}
+
+.job img {
+  height: 55px;
+  width: 55px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.job .year {
+  font-weight: bold;
+  color: var(--primary);
+  width: 50px;
+  text-align: right;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.job .employer {
+  width: 100px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-weight: 500;
+}
+
+.job .place {
+  width: 140px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--lightgray);
+}
+
+.job .role {
+  color: var(--lightgray);
+  font-size: 0.85em;
+  width: 160px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Career card styling */
+.career-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5em;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.career-card:hover {
+  transform: translateY(-5px);
+}
+
+.career-card img {
+  margin-bottom: 0.5em;
+}
+
+.career-card h3 {
+  color: var(--primary);
+  margin: 0.5em 0 0.2em 0;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.career-card p {
+  color: var(--lightgray);
+  font-size: 0.9em;
+  margin: 0;
+}
+

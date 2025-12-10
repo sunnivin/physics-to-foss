@@ -1,0 +1,88 @@
+name: Build Marp Slides
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build HTML slides
+        uses: docker://marpteam/marp-cli:v3.4.0
+        with:
+          args: >
+            --theme sunnivasPhysics/talk/theme.css
+            --html
+            --output ./output/slides.html
+            sunnivasPhysics/talk/slides.md
+
+      - name: Build PDF slides
+        uses: docker://marpteam/marp-cli:v3.4.0
+        with:
+          args: >
+            --theme sunnivasPhysics/talk/theme.css
+            --pdf
+            --allow-local-files
+            --output ./output/slides.pdf
+            sunnivasPhysics/talk/slides.md
+
+      - name: Upload HTML artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: slides-html
+          path: output/slides.html
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: slides-pdf
+          path: output/slides.pdf
+
+  # Deploy to GitHub Pages (optional)
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build HTML for Pages
+        uses: docker://marpteam/marp-cli:v3.4.0
+        with:
+          args: >
+            --theme sunnivasPhysics/talk/theme.css
+            --html
+            --output ./public/index.html
+            sunnivasPhysics/talk/slides.md
+
+      - name: Copy assets to public
+        run: |
+          cp -r sunnivasPhysics/talk/figures public/ || true
+          cp sunnivasPhysics/talk/theme.css public/ || true
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
