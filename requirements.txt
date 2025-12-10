@@ -1,0 +1,6 @@
+# Requirements for Binder
+numpy>=2.0.0
+matplotlib>=3.9.0
+ipywidgets>=8.0.0
+jupyter>=1.0.0
+
