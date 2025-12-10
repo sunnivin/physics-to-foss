@@ -31,18 +31,10 @@ Explore the **Vertical Sky Component (VSC)** and **CIE Standard Overcast Sky** m
 - [Interactive Coordinates Explorer](https://mybinder.org/v2/gh/sunnivin/physics-to-foss/HEAD?labpath=vertical-sky-component%2Finteractive_coordinates.ipynb)
 - [Interactive CIE Model](https://mybinder.org/v2/gh/sunnivin/physics-to-foss/HEAD?labpath=vertical-sky-component%2Finteractive_cie_model.ipynb)
 
-### Google Colab
 
-- [Interactive Coordinates Explorer](https://colab.research.google.com/github/sunnivin/physics-to-foss/blob/main/vertical-sky-component/interactive_coordinates.ipynb)
-- [Interactive CIE Model](https://colab.research.google.com/github/sunnivin/physics-to-foss/blob/main/vertical-sky-component/interactive_cie_model.ipynb)
+## 🎤 Presentation
 
-> **Note:** In Colab, run `!pip install ipywidgets` in the first cell if widgets don't display.
-
-## 🎤 Presentations
-
-### My Path to NGI (`sunnivasPhysics/`)
-
-A personal journey through physics, plasmonics, and scientific software development.
+### My physics journey (`sunnivasPhysics/`)
 
 **Build locally:**
 ```bash
@@ -50,7 +42,6 @@ cd sunnivasPhysics/talk
 docker run --rm -v "$(pwd):/home/marp/app" -p 8080:8080 marpteam/marp-cli --theme theme.css --html -s .
 # Open http://localhost:8080/slides.md
 ```
-
 
 ## 🛠️ Local Development
 
