@@ -41,7 +41,7 @@ sunniva
 </div>
 
 ---
-# Me
+# Interests
 
 <style scoped>
 .category { color: #B22222; font-size: 1.3em; font-weight: bold; margin: 0.8em 0 0.3em 0; border-bottom: 2px solid #B22222; padding-bottom: 0.2em; }
@@ -694,8 +694,10 @@ h1 { font-size: 1.8em; }
 
 ---
 
+<!-- paginate: false -->
+
 # Noen fysikk spørsmål for dagen
 
 1. Hvis jeg vil ha mest mulig sol på taket av huset mitt bør jeg bygge det flatt?
 
-2. Om jeg variarer $\theta$ fra 0 til 360, men holder høyden $z$ konstant hvordan vil dagslyspotensialet påvirkes?
+2. Om jeg variarer $\theta$ fra 0 til 360, men holder høyden $z$ konstant, hvordan vil dagslyspotensialet påvirkes?
