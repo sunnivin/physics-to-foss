@@ -12,12 +12,6 @@ physics-to-foss/
 │       ├── theme.css         # Custom theme
 │       └── figures/          # Images and logos
 │
-├── python-dependency-inferno/ # Python dependency management talk
-│   └── talk/
-│       ├── slides.md
-│       ├── theme.css
-│       └── figures/
-│
 └── vertical-sky-component/   # Interactive VSC visualizations
     ├── interactive_coordinates.ipynb
     ├── interactive_cie_model.ipynb

@@ -1,0 +1,10 @@
+#!/bin/bash
+# PostBuild script for Binder - runs after the environment is built
+
+# Enable ipywidgets extension for JupyterLab
+jupyter labextension enable @jupyter-widgets/jupyterlab-manager || true
+
+# Trust the notebooks (removes security prompts)
+jupyter trust interactive_coordinates.ipynb || true
+jupyter trust interactive_cie_model.ipynb || true
+
