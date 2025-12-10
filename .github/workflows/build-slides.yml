@@ -1,108 +1,52 @@
-name: Build Marp Slides
+name: Deploy Marp Slides
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    branches:
+      - main
 
 permissions:
   contents: write
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Create output directories
-        run: |
-          mkdir -p output
-          mkdir -p public
-
-      - name: Build HTML slides
-        run: |
-          docker run --rm \
-            -v $PWD:/home/marp/app/ \
-            -e MARP_USER="$(id -u):$(id -g)" \
-            marpteam/marp-cli:v3.4.0 \
-            --theme sunnivasPhysics/talk/theme.css \
-            --html \
-            --output output/slides.html \
-            sunnivasPhysics/talk/slides.md
-
-      - name: Build PDF slides
-        run: |
-          docker run --rm \
-            -v $PWD:/home/marp/app/ \
-            -e MARP_USER="$(id -u):$(id -g)" \
-            marpteam/marp-cli:v3.4.0 \
-            --theme sunnivasPhysics/talk/theme.css \
-            --pdf \
-            --allow-local-files \
-            --output output/slides.pdf \
-            sunnivasPhysics/talk/slides.md
-
-      - name: Upload HTML artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: slides-html
-          path: output/slides.html
-
-      - name: Upload PDF artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: slides-pdf
-          path: output/slides.pdf
-
-  # Deploy to GitHub Pages
   deploy:
-    needs: build
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Create public directory
-        run: mkdir -p public
+      - name: Set up environment
+        run: echo "LANG=en_US.UTF-8" >> $GITHUB_ENV
 
-      - name: Build HTML for Pages
+      - name: Generate Marp slides
         run: |
           docker run --rm \
             -v $PWD:/home/marp/app/ \
             -e MARP_USER="$(id -u):$(id -g)" \
+            -e LANG=$LANG \
             marpteam/marp-cli:v3.4.0 \
             --theme sunnivasPhysics/talk/theme.css \
             --html \
-            --output public/index.html \
             sunnivasPhysics/talk/slides.md
 
-      - name: Copy assets to public
+          mkdir -p .deploy
+          cp sunnivasPhysics/talk/slides.html .deploy/index.html
+          [ -d sunnivasPhysics/talk/figures ] && cp -r sunnivasPhysics/talk/figures .deploy/figures
+          [ -f sunnivasPhysics/talk/theme.css ] && cp sunnivasPhysics/talk/theme.css .deploy/theme.css
+
+      - name: Switch to gh-pages branch
         run: |
-          cp -r sunnivasPhysics/talk/figures public/ || true
-          cp sunnivasPhysics/talk/theme.css public/ || true
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: public
+          git fetch origin gh-pages || true
+          git checkout -B gh-pages origin/gh-pages || git checkout --orphan gh-pages
+          git reset --hard
+          rm -rf *
 
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        run: |
+          cp -r .deploy/* .
+          git add -A
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Deploy Marp slides [skip ci]" || echo "No changes to commit"
+          git push origin gh-pages --force

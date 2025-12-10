@@ -146,7 +146,6 @@ Knitting
 
 <div>
 
-**Modeling biopolymers like DNA**
 
 - Statistical mechanics approach
 - Failure and fracture mechanics
